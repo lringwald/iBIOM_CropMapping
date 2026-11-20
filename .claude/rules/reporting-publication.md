@@ -1,0 +1,1 @@
+../../.rules-hub/rules/reporting-publication.md

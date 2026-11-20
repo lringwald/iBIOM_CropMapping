@@ -1,0 +1,14 @@
+LUM.class,lum_name,grazing_mode,allow_synth_nfert,source_ref
+15,Very high density managed pasture system,direct_pasture,TRUE,"input/EPIC/Grassland/LUMClasses.xlsx"
+16,High density managed pasture system,direct_pasture,TRUE,"input/EPIC/Grassland/LUMClasses.xlsx"
+17,Moderate density managed pasture system,direct_pasture,TRUE,"input/EPIC/Grassland/LUMClasses.xlsx"
+18,Low density managed pasture system,direct_pasture,TRUE,"input/EPIC/Grassland/LUMClasses.xlsx"
+19,Very high density managed grassland,mown_grassland,TRUE,"input/EPIC/Grassland/LUMClasses.xlsx"
+20,High density managed grassland,mown_grassland,TRUE,"input/EPIC/Grassland/LUMClasses.xlsx"
+21,Moderate density managed grassland,mown_grassland,TRUE,"input/EPIC/Grassland/LUMClasses.xlsx"
+22,Low density managed grassland,mown_grassland,TRUE,"input/EPIC/Grassland/LUMClasses.xlsx"
+23,Rough grazing,direct_pasture,FALSE,"input/EPIC/Grassland/LUMClasses.xlsx"
+24,Silvo-pastoral agroforestry,direct_pasture,FALSE,"input/EPIC/Grassland/LUMClasses.xlsx"
+25,Managed semi-natural and natural grassland,direct_pasture,FALSE,"input/EPIC/Grassland/LUMClasses.xlsx"
+26,Unmanaged semi-natural and natural grassland,unmanaged,FALSE,"input/EPIC/Grassland/LUMClasses.xlsx"
+

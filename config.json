@@ -1,0 +1,19 @@
+{
+  "TASK": "trial",
+  "YEARS": "2018",
+  "COUNTRIES": "all",
+  "RESULT_TAG": "pasture_v1",
+  "LUM_DIR": "/mnt/wdrv/iBIOM_Explorer/Land_use_and_management",
+  "WORK_DIR": "/mnt/wdrv/iBIOM_pasture_livestock",
+  "SHARED_INPUT_DIR": "/mnt/wdrv/Data/preprocessed_data/iBIOM_CropMapping_input",
+  "OUTPUT_DIR": "output",
+  "LIVESTOCK_SOURCE": "faostat",
+  "EMISSION_SOURCE": "FAO TIER 1",
+  "USE_EUROSTAT_PRIORS": "1",
+  "GWP_VERSION": "AR6",
+  "EXPORT_SPATIAL": "1",
+  "SKIP_EXISTING": "0",
+  "FORCE_PREP": "",
+  "NCORES": 4,
+  "TRIAL": "0"
+}

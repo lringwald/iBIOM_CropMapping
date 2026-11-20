@@ -1,0 +1,26 @@
+band_index,band_name,variable_type,value_semantics,unit,datatype,nodata,description
+1,area_ha,extensive,area,ha,FLT4S,-9999,Total managed pasture and grassland area (LUM 15-25) per 1 km EEA pixel
+2,YLDF_mean,intensive,rate,t DM/ha/yr,FLT4S,-9999,Area-weighted mean EPIC dry-matter forage yield across LUM 15-25
+3,forage_dm_t,extensive,mass,t DM/yr,FLT4S,-9999,Total annual dry-matter forage production on managed pasture and grassland
+4,LSU_total,extensive,count,LSU,FLT4S,-9999,Total sustained ruminant Livestock Units allocated via endogenous grazing feed coefficient
+5,heads_total,extensive,count,heads,FLT4S,-9999,Total downscaled ruminant heads across all four species
+6,dairy_cattle_heads,extensive,count,heads,FLT4S,-9999,Downscaled dairy cattle population (heads)
+7,non_dairy_cattle_heads,extensive,count,heads,FLT4S,-9999,Downscaled non-dairy cattle population (heads)
+8,sheep_heads,extensive,count,heads,FLT4S,-9999,Downscaled sheep population (heads)
+9,goats_heads,extensive,count,heads,FLT4S,-9999,Downscaled goats population (heads)
+10,milk_t,extensive,mass,t/yr,FLT4S,-9999,Total reconciled raw milk production from cattle sheep and goats
+11,meat_t,extensive,mass,t carcass/yr,FLT4S,-9999,Total reconciled carcass meat production from cattle sheep and goats
+12,CH4_enteric_t,extensive,mass,t CH4/yr,FLT4S,-9999,Downscaled enteric fermentation methane emissions
+13,CH4_manure_mgt_t,extensive,mass,t CH4/yr,FLT4S,-9999,Downscaled manure management methane emissions
+14,N2O_manure_mgt_total_t,extensive,mass,t N2O/yr,FLT4S,-9999,Downscaled direct and indirect manure management nitrous oxide emissions
+15,N2O_pasture_prp_total_t,extensive,mass,t N2O/yr,FLT4S,-9999,Downscaled direct and indirect nitrous oxide emissions from manure deposited on pasture
+16,N2O_manure_applied_total_t,extensive,mass,t N2O/yr,FLT4S,-9999,Downscaled direct and indirect nitrous oxide emissions from manure applied to soils
+17,N2O_synth_fert_total_t,extensive,mass,t N2O/yr,FLT4S,-9999,Land-level direct and indirect nitrous oxide emissions from residual synthetic mineral N (LUM 15-22)
+18,CO2_SOC_t,extensive,mass,t CO2/yr,FLT4S,-9999,Land-level soil organic carbon CO2 flux (-dOCPD * area * 44/12; negative = sink)
+19,GHG_livestock_CO2e_t,extensive,mass,t CO2e/yr,FLT4S,-9999,Total livestock CH4 and N2O emissions in CO2 equivalents (configured GWP100)
+20,GHG_pasture_soil_CO2e_t,extensive,mass,t CO2e/yr,FLT4S,-9999,Total land-level pasture soil CO2e balance (CO2_SOC_t + N2O_synth_fert CO2e)
+21,GHG_total_CO2e_t,extensive,mass,t CO2e/yr,FLT4S,-9999,Combined livestock and pasture soil net GHG balance
+22,OCPD_mean,intensive,stock,t C/ha,FLT4S,-9999,Area-weighted mean EPIC initial topsoil organic carbon stock
+23,dOCPD_mean,intensive,rate,t C/ha/yr,FLT4S,-9999,Area-weighted mean EPIC 20-year annual soil organic carbon change
+24,NFERT_mean,intensive,rate,kg N/ha/yr,FLT4S,-9999,Area-weighted mean EPIC total nitrogen input (mineral plus organic)
+

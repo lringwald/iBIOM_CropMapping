@@ -16,19 +16,26 @@
 prior <- list.files(prior.path, full.names = TRUE)
 prior <- prior[grepl(curr.year,prior)]
 
-#### identify curr LUM map
-LUM <- list.files(LUM.path, full.names = TRUE)
-LUM <- LUM[grepl(curr.year,LUM)]
-LUM <- LUM[!grepl(".ovr",LUM)]
-LUM <- LUM[!grepl(".qml",LUM)]
-LUM <- LUM[!grepl(".aux",LUM)]
+#### identify curr LUM map and LUMenergy map (prefers hosted iBIOM_Explorer 100m COG if available)
+lum_resolved <- if (exists("resolve_lum_raster", mode = "function")) {
+  resolve_lum_raster(curr.year, lum_dir = LUM.path, input_dir = INPUT_DIR, must_exist = FALSE)
+} else ""
 
-#### identify curr LUMenergy map
-LUMenergy <- list.files(LUM.energy.path, full.names = TRUE)
-LUMenergy <- LUMenergy[grepl(curr.year,LUMenergy)]
-LUMenergy <- LUMenergy[!grepl(".ovr",LUMenergy)]
-LUMenergy <- LUMenergy[!grepl(".qml",LUMenergy)]
-LUMenergy <- LUMenergy[!grepl(".aux",LUMenergy)]
+if (nzchar(lum_resolved) && file.exists(lum_resolved)) {
+  LUM <- lum_resolved
+} else {
+  LUM <- list.files(LUM.path, full.names = TRUE)
+  LUM <- LUM[grepl(curr.year, LUM)]
+  LUM <- LUM[!grepl("\\.(ovr|qml|aux|xml|yaml)$", LUM)]
+}
+
+if (grepl("^ibiom_LUM_europe_100m_", basename(LUM[1]))) {
+  LUMenergy <- LUM[1]
+} else {
+  LUMenergy <- list.files(LUM.energy.path, full.names = TRUE)
+  LUMenergy <- LUMenergy[grepl(curr.year, LUMenergy)]
+  LUMenergy <- LUMenergy[!grepl("\\.(ovr|qml|aux|xml|yaml)$", LUMenergy)]
+}
 
 #### identify curr EEA map
 EEA.grid <- list.files(EEA.path, full.names = TRUE)

@@ -11,12 +11,13 @@ temp.EEA <- temp.EEA %>% filter(CELLCODE%in%curr.EEA_NUTS$CELLCODE)
 LUM.rast <- terra::rast(LUM)
 LUM.rast <- crop(LUM.rast, ext(temp.EEA))
 
-## load 100m LUM map
-LUMenergy.rast <- terra::rast(LUMenergy)
-LUMenergy.rast <- crop(LUMenergy.rast, ext(temp.EEA))
-
-values(LUM.rast) <- values(LUMenergy.rast)
-rm("LUMenergy.rast")
+## overlay energy-level classification only when LUMenergy points to a separate raster
+if (length(LUMenergy) > 0 && nzchar(LUMenergy[1]) && !identical(LUM[1], LUMenergy[1]) && file.exists(LUMenergy[1])) {
+  LUMenergy.rast <- terra::rast(LUMenergy)
+  LUMenergy.rast <- crop(LUMenergy.rast, ext(temp.EEA))
+  values(LUM.rast) <- values(LUMenergy.rast)
+  rm("LUMenergy.rast")
+}
 
 ## overlay of 1km² country map and 100m LUM map
 ## Faster approach exploiting perfect alignment of grids

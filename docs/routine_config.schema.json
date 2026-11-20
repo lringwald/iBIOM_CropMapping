@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "iBIOM European Pasture, Livestock & Crop Mapping WKUBE Routine",
+  "description": "GENERATED from config/knobs.json by tools/gen_config.R. Resolves hosted iBIOM_Explorer/Land_use_and_management/<year>/ibiom_LUM_europe_100m_<year>.tif rasters and executes the non-GLOBIOM Pasture & Ruminant Livestock downscaling routine (using cascadecore::fienberg) and/or Cropland mapping routine inside IIASA Accelerator WKUBE.",
+  "required": [
+    "TASK"
+  ],
+  "properties": {
+    "TASK": {
+      "type": "string",
+      "title": "Workflow Task",
+      "description": "Workflow Task -- Execution task: 'trial' runs P00_check_env.R + main_pasture.R for AT, NL, ES in 2018; 'pasture' runs the pasture & ruminant livestock downscaling pipeline; 'cropland' runs main.R; 'all' runs both pasture and cropland pipelines; 'check' runs P00_check_env.R only.",
+      "default": "trial",
+      "enum": [
+        "trial",
+        "pasture",
+        "cropland",
+        "all",
+        "check"
+      ]
+    },
+    "YEARS": {
+      "type": "string",
+      "title": "Reference Year(s)",
+      "description": "Reference Year(s) -- Comma-separated LAMASUS LUM reference year(s) from {2000, 2010, 2018}, or 'all' to run 2000,2010,2018.",
+      "default": "2018"
+    },
+    "COUNTRIES": {
+      "type": "string",
+      "title": "Country Subset (NUTS0)",
+      "description": "Country Subset (NUTS0) -- Comma-separated NUTS0 country codes (e.g. 'AT,NL,ES'), or 'all' for all mapped EU countries (excluding CY which has 0 pixels). Trial mode defaults 'all' to 'AT,NL,ES'.",
+      "default": "all"
+    },
+    "RESULT_TAG": {
+      "type": "string",
+      "title": "Result Run Tag",
+      "description": "Result Run Tag -- Run identifier used to scope output/<RESULT_TAG>/ subdirectories and output filenames.",
+      "default": "pasture_v1"
+    },
+    "LUM_DIR": {
+      "type": "string",
+      "title": "Hosted LUM Root Directory",
+      "description": "Hosted LUM Root Directory -- Root folder containing <year>/ibiom_LUM_europe_100m_<year>.tif (on WKUBE: /mnt/wdrv/iBIOM_Explorer/Land_use_and_management; auto-falls back to ~/accelerator/mnt/ibiom/... or input/LUM_data locally).",
+      "default": "/mnt/wdrv/iBIOM_Explorer/Land_use_and_management"
+    },
+    "WORK_DIR": {
+      "type": "string",
+      "title": "Persistent Output Work Directory",
+      "description": "Persistent Output Work Directory -- Persistent shared storage directory under /mnt/wdrv where output/ is redirected so the WKUBE uploader collects artifacts.",
+      "default": "/mnt/wdrv/iBIOM_pasture_livestock"
+    },
+    "SHARED_INPUT_DIR": {
+      "type": "string",
+      "title": "Shared Preprocessed Input Directory",
+      "description": "Shared Preprocessed Input Directory -- Shared drive location holding prepared non-LUM input .rds artifacts (EPIC_grass_params.rds, FAOSTAT accounts, Eurostat priors, 1 km grid mapping).",
+      "default": "/mnt/wdrv/Data/preprocessed_data/iBIOM_CropMapping_input"
+    },
+    "OUTPUT_DIR": {
+      "type": "string",
+      "title": "Relative Output Directory Name",
+      "description": "Relative Output Directory Name -- Output directory name inside the app root (symlinked to $WORK_DIR/$OUTPUT_DIR when WORK_DIR is on /mnt/wdrv).",
+      "default": "output"
+    },
+    "LIVESTOCK_SOURCE": {
+      "type": "string",
+      "title": "Livestock Accounting Source",
+      "description": "Livestock Accounting Source -- National livestock herd, production, and excretion accounting source ('faostat' QCL/GLE/EMN/EK).",
+      "default": "faostat",
+      "enum": [
+        "faostat"
+      ]
+    },
+    "EMISSION_SOURCE": {
+      "type": "string",
+      "title": "FAOSTAT GLE Emission Inventory Source",
+      "description": "FAOSTAT GLE Emission Inventory Source -- Inventory series selected from FAOSTAT GLE livestock emissions ('FAO TIER 1' has complete EU coverage; 'UNFCCC' where reported).",
+      "default": "FAO TIER 1",
+      "enum": [
+        "FAO TIER 1",
+        "UNFCCC"
+      ]
+    },
+    "USE_EUROSTAT_PRIORS": {
+      "type": "string",
+      "title": "Use Eurostat NUTS2 Priors",
+      "description": "Use Eurostat NUTS2 Priors -- Use Eurostat NUTS2 livestock species shares (ef_lsk_*) and milk yields (agr_r_milkpr) as spatial priors in cascadecore::fienberg IPF ('1' = enabled, '0' = uniform national baseline).",
+      "default": "1",
+      "enum": [
+        "1",
+        "0"
+      ]
+    },
+    "GWP_VERSION": {
+      "type": "string",
+      "title": "IPCC GWP100 Metric Version",
+      "description": "IPCC GWP100 Metric Version -- 100-year Global Warming Potential weights for CH4 and N2O ('AR6': 27/273, 'AR5': 28/265, 'AR4': 25/298).",
+      "default": "AR6",
+      "enum": [
+        "AR6",
+        "AR5",
+        "AR4"
+      ]
+    },
+    "EXPORT_SPATIAL": {
+      "type": "string",
+      "title": "Export Spatial Country Outputs",
+      "description": "Export Spatial Country Outputs -- Export 24-band COG GeoTIFF, EPSG:3035 1 km centroid GeoPackage, and Apache Arrow Parquet per country ('1' = enabled, '0' = RDS/CSV only).",
+      "default": "1",
+      "enum": [
+        "1",
+        "0"
+      ]
+    },
+    "SKIP_EXISTING": {
+      "type": "string",
+      "title": "Skip Completed Country Outputs",
+      "description": "Skip Completed Country Outputs -- Set to '1' to resume an interrupted run by skipping countries whose atomic RDS file already exists in output/<RESULT_TAG>/.",
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ]
+    },
+    "FORCE_PREP": {
+      "type": "string",
+      "title": "Force Re-preparation Steps",
+      "description": "Force Re-preparation Steps -- Optional comma-separated preparation step names to re-run even if outputs exist (e.g. 'EPIC_grass,faostat_accounts,eurostat_priors'). Leave empty to reuse prepared inputs. OPTIONAL: leave empty for empty/default.",
+      "default": ""
+    },
+    "NCORES": {
+      "type": "integer",
+      "title": "Worker CPU Threads",
+      "description": "Worker CPU Threads -- Number of CPU threads/cores allocated to the container (data.table / GDAL threads; BLAS threads remain pinned to 1).",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 64
+    },
+    "TRIAL": {
+      "type": "string",
+      "title": "Trial Verification Mode",
+      "description": "Trial Verification Mode -- When '1' (or when TASK='trial'), scopes run to YEARS='2018' and COUNTRIES='AT,NL,ES' (if COUNTRIES is 'all') for fast end-to-end verification.",
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ]
+    }
+  }
+}

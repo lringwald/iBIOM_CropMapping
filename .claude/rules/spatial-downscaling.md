@@ -1,0 +1,1 @@
+../../.rules-hub/rules/spatial-downscaling.md
